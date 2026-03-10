@@ -12,7 +12,7 @@ requires-python = ">=3.9"
 authors = [
     { name = "Stefan Ilić", email = "stefanilic3001@gmail.com" },
 ]
-keywords = ["nessie", "graph", "filter, "plugin"]
+keywords = ["nessie", "graph", "filter", "plugin"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -24,7 +24,9 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
+
 dependencies = [
+    "nessie_api>=0.1.0",
 ]
 
 [project.optional-dependencies]
