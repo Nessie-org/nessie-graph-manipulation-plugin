@@ -82,7 +82,7 @@ def _apply(graph: Graph, filters: list[FilterExpression], search: str) -> Graph:
 #  Handlers
 # ─────────────────────────────────────────────
 
-def _handle_filter_graph(action: Action) -> Graph:
+def _handle_filter_graph(action: Action, context: Context) -> Graph:
     """
     payload: {
         "graph":   Graph,
