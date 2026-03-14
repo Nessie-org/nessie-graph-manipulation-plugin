@@ -97,54 +97,6 @@ def _handle_filter_graph(action: Action, context: Context) -> Graph:
     )
 
 
-def _handle_undo(action: Action, context: Context) -> Graph | None:
-    """
-    Undoes the last filter operation on the active workspace
-    and returns the updated subgraph.
-    """
-    index = context.get_active_workspace_index()
-    if index is None:
-        return
-
-    context.undo_at(index)
-    return _apply(
-        context.get_full_graph_at(index),
-        context.get_active_filters_at(index),
-        context.get_search_at(index) or "",
-    )
-
-
-def _handle_redo(action: Action, context: Context) -> Graph | None:
-    """
-    Redoes the last undone filter operation on the active workspace
-    and returns the updated subgraph.
-    """
-    index = context.get_active_workspace_index()
-    if index is None:
-        return
-
-    context.redo_at(index)
-    return _apply(
-        context.get_full_graph_at(index),
-        context.get_active_filters_at(index),
-        context.get_search_at(index) or "",
-    )
-
-
-def _handle_reset(action: Action, context: Context) -> Graph | None:
-    """
-    Clears all filters and search on the active workspace
-    and returns the full source graph.
-    """
-    index = context.get_active_workspace_index()
-    if index is None:
-        return
-
-    context.clear_filters_at(index)
-    context.set_search_at(index, "")
-    return context.get_full_graph_at(index)
-
-
 # ─────────────────────────────────────────────
 #  Plugin definition
 # ─────────────────────────────────────────────
@@ -152,10 +104,7 @@ def _handle_reset(action: Action, context: Context) -> Graph | None:
 @plugin(name="GraphManipulationPlugin")
 def graph_manipulation_plugin():
     handlers = {
-        "filter_graph": _handle_filter_graph,
-        "undo":         _handle_undo,
-        "redo":         _handle_redo,
-        "reset":        _handle_reset,
+        "filter_graph": _handle_filter_graph
     }
     requires = []
     setup_requires = {}
