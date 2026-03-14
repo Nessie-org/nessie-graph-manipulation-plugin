@@ -7,12 +7,11 @@ name = "nessie-graph-manipulation-plugin"
 version = "0.1.0"
 description = "Nessie Graph Manipulation Plugin - A Python package for graph manipulation plugin"
 readme = "README.md"
-license = { text = "Apache-2.0" }
 requires-python = ">=3.9"
 authors = [
     { name = "Stefan Ilić", email = "stefanilic3001@gmail.com" },
 ]
-keywords = ["nessie", "graph", "filter, "plugin"]
+keywords = ["nessie", "graph", "filter", "plugin"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -24,7 +23,9 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
+
 dependencies = [
+    "nessie-api>=0.1.0",
 ]
 
 [project.optional-dependencies]
@@ -35,6 +36,9 @@ dev = [
     "ruff>=0.1.0",
     "mypy>=1.0.0",
 ]
+
+[project.entry-points."nessie_plugins"]
+nessie_graph_manipulation_plugin = "nessie_graph_manipulation_plugin:graph_manipulation_plugin"
 
 [project.urls]
 Homepage = "https://github.com/Nessie-org/nessie-graph-manipulation-plugin"
@@ -63,7 +67,6 @@ ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "--cov=src/nessie_graph_manipulation_plugin --cov-report=term-missing"
 
 [tool.coverage.run]
 source = ["src/nessie_graph_manipulation_plugin"]
