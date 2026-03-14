@@ -23,11 +23,14 @@ def _node_matches_filter(node: Node, f: FilterExpression) -> bool:
     a, b = attr.value, f.value
 
     if type(a) is not type(b):
-        raise TypeError(
-            f"Type mismatch on node {node.id!r}: "
-            f"attribute '{f.attr_name}' is {type(a).__name__}, "
-            f"filter value is {type(b).__name__}."
-        )
+        try:
+            b = type(a)(b)
+        except (ValueError, TypeError):
+            raise TypeError(
+                f"Type mismatch on node {node.id!r}: "
+                f"attribute '{f.attr_name}' is {type(a).__name__}, "
+                f"filter value is {type(b).__name__} and cannot be converted."
+            )
 
     match f.operator:
         case FilterOperator.EQ: return a == b
